@@ -34,3 +34,11 @@ def DBContext(db_url=None):
         yield session
     finally:
         session.remove()
+
+def create_test_db(test_db_url, fields):
+    engine = create_engine(test_db_url)
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(engine)
+    with DBContext(test_db_url) as db:
+        db.add_all(fields)
+        db.commit()
