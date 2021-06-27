@@ -3,7 +3,7 @@ import unittest
 import jwt
 
 from settings import SECRET_KEY
-from middleware import is_token_valid
+from service import is_token_valid
 
 
 class TestLoginRequired(unittest.TestCase):
