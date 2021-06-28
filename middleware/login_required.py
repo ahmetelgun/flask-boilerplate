@@ -1,4 +1,4 @@
-from flask import request, make_response, jsonify
+from flask import request, make_response, jsonify, g
 from datetime import datetime
 from functools import wraps
 import jwt
@@ -12,17 +12,16 @@ def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         token = request.cookies.get('token')
-        not_authenticated_response = make_response(jsonify(
-            {"message": "Login required"}
-        ), 401)
-
-        if not token:
-            return not_authenticated_response
+        not_authenticated_response = make_response(
+            jsonify({"message": "Login required"}),
+            401
+        )
 
         user = is_token_valid(token)
         if user:
             return func(user, *args, **kwargs)
 
+        g.token = ""
         return not_authenticated_response
 
     return wrapper
