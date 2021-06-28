@@ -1,7 +1,7 @@
 from flask import Flask, g, request, make_response
 
 from service import set_token_to_response, refresh_jwt
-from controllers.auth import register, login
+from controllers.auth import register, login, logout
 from settings import FRONTEND_URL
 
 app = Flask(__name__)
@@ -30,6 +30,10 @@ def register_func():
 @app.route('/login', methods=['POST'])
 def login_func():
     return login()
+
+@app.route('/logout')
+def logout_func():
+    return logout()
 
 
 @app.route('/')
