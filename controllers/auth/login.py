@@ -26,7 +26,7 @@ def login():
         return make_response(jsonify(
             {"message": "Login success"}
         ), 200)
-    
+
     return make_response(jsonify(
         {"message": "Username or password is incorrect"}
     ), 401)
