@@ -1,4 +1,4 @@
-from flask import request, make_response
+from flask import request, make_response, jsonify
 import bcrypt
 import html
 
@@ -40,7 +40,7 @@ def write_user(data):
             return False
 
         user = User(firstname=firstname, lastname=lastname, email=email)
-        user.password = bcrypt.hashpw(password, bcrypt.gensalt())
+        user.password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
         db.add(user)
         db.commit()

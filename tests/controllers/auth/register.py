@@ -40,8 +40,8 @@ class TestRegister(unittest.TestCase):
     def test_write_user(self):
         # exist user
         self.assertFalse(write_user(
-            ["anakin", "skywalker", "anakin@skywalker.space", b"12345678"]))
+            ["anakin", "skywalker", "anakin@skywalker.space", "12345678"]))
 
         # new user
         self.assertTrue(write_user(
-            ["master", "yoda", "master@yoda.space", b"12345678"]))
+            ["master", "yoda", "master@yoda.space", "12345678"]))
