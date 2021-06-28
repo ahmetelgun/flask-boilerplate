@@ -2,6 +2,7 @@ from flask import Flask, g, request, make_response
 
 from service import set_token_to_response, refresh_jwt
 from controllers.auth import register, login
+from settings import FRONTEND_URL
 
 app = Flask(__name__)
 
@@ -13,10 +14,12 @@ def before_request():
 
 @app.after_request
 def after_request(resp):
+    resp.headers['Access-Control-Allow-Origin'] = FRONTEND_URL
     if g.token:
         new_token = refresh_jwt(g.token)
         return set_token_to_response(resp, new_token)
     return set_token_to_response(resp)
+    
 
 
 @app.route('/register', methods=['POST'])
