@@ -2,6 +2,7 @@ import jwt
 from datetime import datetime
 
 from settings import SECRET_KEY, TOKEN_MAX_AGE, TOKEN_REFRESH_TIME
+from .create_jwt import create_jwt
 
 
 def refresh_jwt(token):
@@ -10,8 +11,6 @@ def refresh_jwt(token):
     email = decoded_jwt['email']
 
     if expire_time <= (datetime.now().timestamp() + TOKEN_REFRESH_TIME):
-        token = jwt.encode(
-            {"email": email, "datetime": datetime.now().timestamp() + TOKEN_MAX_AGE}, SECRET_KEY, algorithm="HS256"
-        )
+        token = create_jwt(email)
 
     return token
