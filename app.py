@@ -1,4 +1,5 @@
 from flask import Flask, g, request, make_response
+import json
 
 from service import set_token_to_response, refresh_jwt
 from controllers.auth import register, login, logout
@@ -15,11 +16,13 @@ def before_request():
 @app.after_request
 def after_request(resp):
     resp.headers['Access-Control-Allow-Origin'] = FRONTEND_URL
+    resp.headers['Access-Control-Allow-Headers'] = "content-type"
+    resp.headers['Access-Control-Allow-Credentials'] = "true"
+
     if g.token:
         new_token = refresh_jwt(g.token)
         return set_token_to_response(resp, new_token)
     return set_token_to_response(resp)
-    
 
 
 @app.route('/register', methods=['POST'])
@@ -31,6 +34,7 @@ def register_func():
 def login_func():
     return login()
 
+
 @app.route('/logout')
 def logout_func():
     return logout()
@@ -38,7 +42,7 @@ def logout_func():
 
 @app.route('/')
 def index():
-    return "index"
+    return {"name": "asd"}
 
 
 if __name__ == '__main__':
