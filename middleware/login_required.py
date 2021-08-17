@@ -11,17 +11,14 @@ from service import is_token_valid
 def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        token = request.cookies.get('token')
         not_authenticated_response = make_response(
             jsonify({"message": "Login required"}),
             401
         )
 
-        user = is_token_valid(token)
-        if user:
+        if g.user:
             return func(user, *args, **kwargs)
 
-        g.token = ""
         return not_authenticated_response
 
     return wrapper

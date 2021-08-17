@@ -23,9 +23,6 @@ def login():
     user = is_login(email, password)
     if user:
         g.token = create_jwt(user.email)
-        print("///////////////////////")
-        print("asdsadasdsadasdasdsad")
-        print("///////////////////////")
         return make_response(jsonify(
             {"message": "Login success"}
         ), 200)
