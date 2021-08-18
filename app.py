@@ -27,7 +27,6 @@ def before_request():
 def after_request(resp):
     resp.headers['Access-Control-Allow-Origin'] = FRONTEND_URL
     resp.headers['Access-Control-Allow-Headers'] = "content-type"
-    resp.headers['Access-Control-Allow-Credentials'] = "true"
 
     new_token = refresh_jwt(g.token)
     return set_token_to_response(resp, new_token)

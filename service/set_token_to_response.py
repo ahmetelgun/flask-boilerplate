@@ -1,4 +1,4 @@
-from settings import TOKEN_MAX_AGE, BACKEND_DOMAIN
+from settings import TOKEN_MAX_AGE
 
 
 def set_token_to_response(response, token=None):
