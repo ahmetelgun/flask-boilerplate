@@ -21,6 +21,11 @@ Run tests
 python -m unittest
 ```
 
+Create Database
+```bash
+python models.py
+```
+
 Start the application
 ```bash
 python app.py
