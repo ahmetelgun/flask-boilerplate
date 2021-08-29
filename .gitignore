@@ -1,3 +1,4 @@
 Pipfile*
 .vscode
 *.db*
+**/__pycache__
