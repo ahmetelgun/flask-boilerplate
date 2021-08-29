@@ -4,6 +4,7 @@ import json
 from service import set_token_to_response, refresh_jwt, is_token_valid
 from controllers.auth import register, login, logout
 from settings import FRONTEND_URL
+from middleware import login_required
 
 app = Flask(__name__)
 
@@ -42,14 +43,14 @@ def login_func():
     return login()
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET'])
 def logout_func():
     return logout()
 
-
 @app.route('/')
-def index():
-    return {"name": "asd"}
+@login_required
+def index(user):
+    return {"message": f"welcome, {user.firstname}"}
 
 
 if __name__ == '__main__':
