@@ -19,6 +19,8 @@ def before_request():
         if user:
             g.user = user
             g.token = token
+        else:
+            raise Exception
 
     except:
         g.token = None

@@ -17,7 +17,7 @@ def login_required(func):
         )
 
         if g.user:
-            return func(user, *args, **kwargs)
+            return func(g.user, *args, **kwargs)
 
         return not_authenticated_response
 
