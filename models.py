@@ -1,8 +1,11 @@
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, Integer, String, create_engine, ForeignKey, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, scoped_session
-from settings import DATABASE_URL
+from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from contextlib import contextmanager
+import datetime
+
+from settings import DATABASE_URL
+
 
 Base = declarative_base()
 
@@ -15,6 +18,25 @@ class User(Base):
     lastname = Column(String(32), nullable=False)
     email = Column(String(64), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
+    posts = relationship('Post', back_populates='author')
+
+
+class Post(Base):
+    __tablename__ = 'Posts'
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String(64), nullable=False)
+    body = Column(String, nullable=False)
+    excerpt = Column(String, nullable=False)
+    endpoint = Column(String(64), nullable=False, unique=True)
+    created_date = Column(Integer, nullable=False,
+                          default=int(datetime.datetime.utcnow().timestamp()))
+    updated_date = Column(DateTime, nullable=True,
+                          onupdate=int(datetime.datetime.utcnow().timestamp()))
+    is_draft = Column(Boolean, default=True, nullable=False)
+    is_deleted = Column(Boolean, default=False)
+    author_id = Column(Integer, ForeignKey('Users.id'))
+    author = relationship("User", back_populates="posts")
 
 
 if __name__ == '__main__':
@@ -34,6 +56,7 @@ def DBContext(db_url=None):
         yield session
     finally:
         session.remove()
+
 
 def create_test_db(test_db_url, fields):
     engine = create_engine(test_db_url)
