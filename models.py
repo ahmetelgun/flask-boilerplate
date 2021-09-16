@@ -20,6 +20,9 @@ class User(Base):
     password = Column(String(128), nullable=False)
     posts = relationship('Post', back_populates='author')
 
+    def get_user(self):
+        return {"id": self.id, "firstname": self.firstname, "lastname": self.lastname, "email": self.email}
+
 
 class Post(Base):
     __tablename__ = 'Posts'

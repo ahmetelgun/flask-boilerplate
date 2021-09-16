@@ -3,7 +3,7 @@ import json
 
 from service import set_token_to_response, refresh_jwt, is_token_valid
 from controllers.auth import register, login, logout
-from controllers.posts import posts_create
+from controllers.posts import posts_create, posts_index
 from settings import FRONTEND_URL
 from middleware import login_required
 
@@ -55,6 +55,11 @@ def logout_func():
 @login_required
 def posts_create_func(user):
     return posts_create()
+
+
+@app.route('/posts', methods=['GET'])
+def posts_index_func():
+    return posts_index()
 
 
 @app.route('/', methods=['GET'])
