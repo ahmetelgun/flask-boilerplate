@@ -8,6 +8,7 @@ from settings import FRONTEND_URL
 from middleware import login_required
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
 @app.before_request
@@ -26,6 +27,7 @@ def before_request():
     except:
         g.token = None
         g.user = None
+
 
 @app.after_request
 def after_request(resp):
