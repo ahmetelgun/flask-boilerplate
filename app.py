@@ -1,10 +1,12 @@
 from flask import Flask, g, request, make_response
+from flask_expects_json import expects_json
 import json
 
 from service import set_token_to_response, refresh_jwt, is_token_valid
 from controllers.auth import register, login, logout
 from settings import FRONTEND_URL
 from middleware import login_required
+import schemas
 
 app = Flask(__name__)
 
@@ -36,11 +38,13 @@ def after_request(resp):
 
 
 @app.route('/register', methods=['POST'])
+@expects_json(schemas.register_schema)
 def register_func():
     return register()
 
 
 @app.route('/login', methods=['POST'])
+@expects_json(schemas.login_schema)
 def login_func():
     return login()
 
