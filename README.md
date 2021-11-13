@@ -1,13 +1,13 @@
-# Flask API Boilerplate
+# Orion
 
-Simple Flask boilerplate with register, login, logout endpoints.
+Orion is a headless blog API system
 
 ## Installation
 
 Clone the repository
 ```bash
-git clone https://github.com/ahmetelgun/flask-boilerplate.git
-cd flask-boilerplate
+git clone https://github.com/ahmetelgun/Orion.git
+cd Orion
 ```
 
 Activate virtualenv and install requirements
@@ -33,7 +33,7 @@ python app.py
 
 ## Usage
 
-flask-boilerplate has 4 enpoints.
+Orion has 4 enpoints.
 
 ### /register [POST]
 
