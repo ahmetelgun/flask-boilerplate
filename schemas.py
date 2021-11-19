@@ -17,3 +17,14 @@ login_schema = {
     },
     'required': ['email', 'password']
 }
+
+posts_create = {
+    'type': 'object',
+    'properties': {
+        'title': {'type': 'string'},
+        'text': {'type': 'string'},
+        'is_deleted': {'type': 'boolean'},
+        'is_draft': {'type': 'boolean'}
+    },
+    'required': ['title', 'text', 'is_deleted', 'is_draft']
+}
