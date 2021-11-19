@@ -14,10 +14,13 @@ class TestCreateEndpoint(unittest.TestCase):
 
         title1 = "How to create an endpoint?"
         title2 = "@nak!n skywalk3r !s  the ch0sen @ne "
+        title3 = " - !/.^&#"
         title1_text = "how-to-create-an-endpoint"
         title2_text = "nak-n-skywalk3r-s-the-ch0sen-ne"
+        title3_text = ""
 
         self.assertEqual(create_endpoint(date1, title1), date1_text+title1_text)
         self.assertEqual(create_endpoint(date1, title2), date1_text+title2_text)
         self.assertEqual(create_endpoint(date2, title1), date2_text+title1_text)
         self.assertEqual(create_endpoint(date2, title2), date2_text+title2_text)
+        self.assertEqual(create_endpoint(date2, title3), False)
