@@ -24,7 +24,7 @@ def register():
 
     if write_user(validated_data):
         return make_response(jsonify(
-            {"message": "User successfuly created"}
+            {"message": "Registration success"}
         ), 200)
 
     return make_response(jsonify(
