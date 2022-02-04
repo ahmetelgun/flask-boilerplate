@@ -29,6 +29,7 @@ def before_request():
         g.token = None
         g.user = None
 
+
 @app.after_request
 def after_request(resp):
     resp.headers['Access-Control-Allow-Origin'] = FRONTEND_URL
@@ -54,11 +55,13 @@ def login_func():
 def logout_func():
     return logout()
 
+
 @app.route('/posts/create', methods=['POST'])
 @expects_json(schemas.posts_create)
 @login_required
 def posts_create_func(user):
     return posts.create(user)
+
 
 @app.route('/', methods=['GET'])
 @login_required

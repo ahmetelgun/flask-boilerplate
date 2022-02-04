@@ -27,7 +27,8 @@ class Post(Base):
     title = Column(String(128), nullable=False)
     text = Column(Text, nullable=False)
     excerpt = Column(Text, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, nullable=False,
+                        default=datetime.datetime.utcnow)
     updated_at = Column(DateTime, onupdate=datetime.datetime.utcnow)
     endpoint = Column(String(128), nullable=False, unique=True)
     is_deleted = Column(Boolean, nullable=False, default=False)
@@ -53,6 +54,7 @@ def DBContext(db_url=None):
         yield session
     finally:
         session.remove()
+
 
 def create_test_db(test_db_url, fields):
     engine = create_engine(test_db_url)
