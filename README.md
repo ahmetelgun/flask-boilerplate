@@ -33,11 +33,8 @@ python app.py
 
 ## Usage
 
-Orion has 4 enpoints.
-
 ### /register [POST]
 
-#### Body
 
 ```json
 {
@@ -50,24 +47,14 @@ Orion has 4 enpoints.
 
 #### Response
 
-Response takes 3 different response codes.
+200: Success
 
-If user successfully created, returns 200.
+400: Invalid request
 
-If request is invalid, returns 400.
-
-If email is already exists, returns 409.
-
-*Response with 200 status code*
-```json
-{
-    "message": "User successfuly created"
-}
-```
+409: Email already exists
 
 ### /login [POST]
 
-#### Body
 
 ```json
 {
@@ -78,20 +65,11 @@ If email is already exists, returns 409.
 
 #### Response
 
-Response takes 3 different response codes.
+200: Success
 
-If loggin success, returns 200 with JWT Token in Authorization header.
+400: Invalid request
 
-If request is invalid, returns 400.
-
-If email or password incorrect, returns 401.
-
-*Response with 200 status code*
-```json
-{
-    "message": "Login success"
-}
-```
+401: Email or password incorrect
 
 ### /logout [GET]
 
