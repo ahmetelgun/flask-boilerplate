@@ -63,6 +63,12 @@ def posts_create_func(user):
     return posts.create(user)
 
 
+@app.route('/posts/list', methods=['GET'])
+def posts_list_func():
+    args = request.args
+    return posts.list(args)
+
+
 @app.route('/', methods=['GET'])
 @login_required
 def index(user):
