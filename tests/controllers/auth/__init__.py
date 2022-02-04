@@ -1,2 +1,2 @@
-from .register import TestRegister
-from .login import TestLogin
+from .register_test import TestRegister
+from .login_test import TestLogin
