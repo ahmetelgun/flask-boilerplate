@@ -69,6 +69,11 @@ def posts_list_func():
     return posts.list(args)
 
 
+@app.route('/posts/<int:year>/<int:month>/<int:day>/<string:title>', methods=['GET'])
+def posts_detail_func(year, month, day, title):
+    return posts.detail(f"/{year}/{month}/{day}/{title}")
+
+
 @app.route('/', methods=['GET'])
 @login_required
 def index(user):
