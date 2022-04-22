@@ -45,13 +45,13 @@ python app.py
 }
 ```
 
-#### Response
+**Response**
 
-200: Success
+* 200: Success
 
-400: Invalid request
+* 400: Bad request
 
-409: Email already exists
+* 409: Email already exists
 
 ### /login [POST]
 
@@ -63,18 +63,48 @@ python app.py
 }
 ```
 
-#### Response
+**Response**
 
-200: Success
+* 200: Success
 
-400: Invalid request
+* 400: Bad request
 
-401: Email or password incorrect
+* 401: Email or password incorrect
 
 ### /logout [GET]
 
 Actually, logout endpoint does nothing. It sends only 200 response without Authorization header whether user logged in or not. 
 
+### /posts/create [POST]
+
+```json
+{
+    "title": "anakin@skywalker.space",
+    "text": "padme_amidala",
+    "is_deleted": false,
+    "is_draft": false
+}
+```
+
+**Response**
+
+* 200: Post created
+
+* 400: Bad request
+
+* 401: Login required
+
+### /posts/list{?page=1} [GET]
+
+**Response**
+
+* 200: Success
+
+### /posts/<int:year>/<int:month>/<int:day>/<string:title> [GET]
+
+**Response**
+
+* 200: Success
 ### / [GET]
 
 / endpoint is the test endpoint for authentication. If you send a valid JWT Token in Authorization header, you get a response with 200 status code like this:

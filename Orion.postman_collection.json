@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstname\": \"Anakin\",\n    \"lastname\": \"Skywalker\",\n    \"email\": \"anakin@asad.space\",\n    \"password\": \"padme_amidala\"\n}",
+					"raw": "{\n    \"firstname\": \"Anakin\",\n    \"lastname\": \"Skywalker\",\n    \"email\": \"anakin@skywalker.space\",\n    \"password\": \"padme_amidala\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,6 +33,9 @@
 		},
 		{
 			"name": "login",
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -48,7 +51,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"anakin@skywalker.space\",\n    \"password\": \"padme_amidala\"\n}",
+					"raw": "{\n    \"email\": \"anakin@skywalker.space\",\n    \"password\": \"padme_amidla\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -110,8 +113,90 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "post create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"test\",\n    \"text\": \"lorem ipsum dolor sit amet\",\n    \"is_deleted\": false,\n    \"is_draft\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/posts/create",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"posts",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/posts/list?page=1",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"posts",
+						"list"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/posts/2022/04/22/test",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"posts",
+						"2022",
+						"04",
+						"22",
+						"test"
+					]
+				}
+			},
+			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_token}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
